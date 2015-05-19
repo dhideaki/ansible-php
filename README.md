@@ -1,6 +1,6 @@
 # ansible-php
 
-An Ansible playbook for installing Redmine on Ubuntu14.04
+An Ansible playbook for installing php on Ubuntu14.04
 
 ServersMan@VPS Entry Ubuntu14.04 LTS（64bit）
 
