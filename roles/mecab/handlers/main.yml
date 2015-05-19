@@ -1,0 +1,14 @@
+---
+
+- name: install php-mecab 1
+  shell: pear channel-discover pecl.opendogs.org
+- name: install php-mecab 2
+  shell: pear remote-list -c opendogs
+- name: install php-mecab 3
+  shell: pear install opendogs/mecab-beta
+
+- name: enable php5-mecab
+  command: php5enmod mecab
+
+- name: mecab restart apache2
+  service: name=apache2 state=restarted

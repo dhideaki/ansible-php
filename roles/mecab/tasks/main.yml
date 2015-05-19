@@ -1,0 +1,20 @@
+---
+
+- name: install mecab packages
+  apt: name={{item}} state=latest
+  with_items:
+    - mecab
+    - libmecab-dev
+    - mecab-ipadic-utf8
+    - mecab-jumandic-utf8
+
+# echo 'extension=mecab.so' | sudo tee /etc/php5/mods-available/mecab.ini
+- name: mecab.ini
+  copy: dest=/etc/php5/mods-available/mecab.ini content="extension=mecab.so"
+  notify:
+    - install php-mecab 1
+    - install php-mecab 2
+    - install php-mecab 3
+    - enable php5-mecab
+    - mecab restart apache2
+

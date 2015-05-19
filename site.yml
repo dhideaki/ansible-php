@@ -1,0 +1,7 @@
+---
+- hosts: php-server
+  sudo: yes
+  roles:
+    - common
+    - php
+    - mecab

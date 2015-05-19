@@ -1,0 +1,6 @@
+---
+- name: enable php5-mcrypt
+  command: php5enmod mcrypt
+
+- name: restart apache2
+  service: name=apache2 state=restarted

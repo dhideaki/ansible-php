@@ -1,0 +1,36 @@
+---
+
+- name: install tools
+  apt: name={{item}} state=latest
+  with_items:
+    - libtool
+    - git
+    - bundler
+    - unzip
+
+- name: install php packages
+  apt: name={{item}} state=latest
+  with_items:
+    - php5
+    - php5-dev
+    - php-pear
+    - php5-curl
+  notify:
+    - restart apache2
+
+- name: install php5-mcrypt
+  apt: name=php5-mcrypt state=latest
+  notify:
+    - enable php5-mcrypt
+    - restart apache2
+
+- name: stat composer
+  stat: path=/usr/local/bin/composer
+  register: composer_stat
+- name: install composer
+  shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
+  when: not composer_stat.stat.exists
+- name: move composer.phar to composer
+  command: mv /usr/local/bin/composer.phar /usr/local/bin/composer
+  when: not composer_stat.stat.exists
+

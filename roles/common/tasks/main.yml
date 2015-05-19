@@ -1,0 +1,9 @@
+---
+# file: roles/common/tasks/main.yml
+
+#- apt: update_cache=yes
+#- apt: upgrade=dist
+- apt: upgrade=dist update_cache=yes cache_valid_time=3600
+
+- apt: name=language-pack-ja state=latest
+
